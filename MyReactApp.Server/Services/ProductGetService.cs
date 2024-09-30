@@ -28,9 +28,15 @@ public class ProductGetService
         // Apply sorting
         productQuery = query.SortBy.ToLower() switch
         {
-            "createddate" => productQuery.OrderBy(p => p.CreatedDate),
-            "name" => productQuery.OrderBy(p => p.Name),
-            _ => productQuery.OrderBy(p => p.Id),
+            "createddate" => query.SortOrder.ToLower() == "desc"
+                ? productQuery.OrderByDescending(p => p.CreatedDate)
+                : productQuery.OrderBy(p => p.CreatedDate),
+            "name" => query.SortOrder.ToLower() == "desc"
+                ? productQuery.OrderByDescending(p => p.Name)
+                : productQuery.OrderBy(p => p.Name),
+            _ => query.SortOrder.ToLower() == "desc"
+                ? productQuery.OrderByDescending(p => p.Id)
+                : productQuery.OrderBy(p => p.Id),
         };
 
         // Get total count for pagination
@@ -68,7 +74,7 @@ public class ProductGetService
             TotalCount = totalItems,
             PageNumber = query.PageNumber,
             PageSize = query.PageSize,
-            Items = products
+            Products = products
         };
     }
 }
