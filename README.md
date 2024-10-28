@@ -9,3 +9,6 @@ To Run App
 dotnet ef dbcontext scaffold "Server=.\;Database=Shop_DB;Trusted_Connection=true;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models --context ShopDbContext --no-build
 ```
 4. Run App
+
+UI
+![UI](https://github.com/user-attachments/assets/388240a6-b037-4952-ba34-423d31dfac1c)
